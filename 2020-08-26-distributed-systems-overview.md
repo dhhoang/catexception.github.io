@@ -2,7 +2,7 @@
 layout: page
 title: "Tổng quan về Distributed Systems"
 date: 2020-08-26 09:45:00 +0700
-categories: distributed-systems
+permalink: 2020/08/26/distributed-systems-overview
 ---
 
 # [P1] Tổng quan về Distributed Systems
