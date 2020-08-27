@@ -1,0 +1,218 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+        <title>My Blog - First Post</title>
+        <meta name="description" content="Welcome!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+
+        <link type="application/rss+xml" rel="alternate" title="My Blog" href="/feed.rss" />
+                <link type="application/atom+xml" rel="alternate" title="My Blog" href="/feed.atom" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+        <link href="/assets/css/clean-blog.css" rel="stylesheet" />
+        <link href="/assets/css/master.css" rel="stylesheet" />
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+
+        <meta name="application-name" content="My Blog" />
+        <meta name="msapplication-tooltip" content="My Blog" />
+        <meta name="msapplication-starturl" content="/" />
+
+        <meta property="og:title" content="My Blog - First Post" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://host.com/posts/distributed-system-overview" />
+        <!-- TODO: More social graph meta tags -->
+
+        
+
+
+        </head>
+        <body>
+                
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+                        <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header page-scroll">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="/">My Blog</a>
+                                </div>
+                        
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+                                                        <li><a href="/posts">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About Me</a></li>
+ 
+                                        </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container -->
+                </nav>
+                
+                <!-- Page Header -->
+                <header class="intro-header" id="intro-header">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-md-12">
+
+    
+<div class="post-heading">
+    <h1>First Post</h1>
+    <div class="meta">        
+Published on Friday, January 1, 2016<br>    </div>
+        <div class="tags">
+                    <a role="button" href="/tags/Introduction" class="btn btn-default btn-xs">Introduction</a>
+        </div>     
+</div>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                
+                <!-- Main Content -->
+                <div class="container">
+                        <div class="row">
+                                <div id="content" class="col-md-12">
+                                        
+
+<p>Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.</p>
+<h2 id="so-luoc">Sơ lược</h2>
+<p>Một &quot;hệ thống phân tán&quot; (Distributed Systems-từ giờ xin được phép sử dụng từ gốc tiếng Anh) được định nghĩa là một tập hợp các tiến trình điện toán (process) độc lập, được kết nối với nhau bởi một hệ thống mạng (network) để các process này có thể truyền nhận thông tin  ('process' ở đây được định nghĩa là một đơn vị điện toán được vận hành với một không gian bộ nhớ-memory space-riêng biệt, không trùng lặp với các process khác). Các process này phối hợp hoạt động với nhau như một thực thể duy nhất đối với người dùng bên ngoài  nhằm thực thi một nhiệm vụ nào đó. Dựa theo định nghĩa này thì nhiều process trên cùng 1 máy tính cũng có thể được coi như Distributed Systems (DS). Dĩ nhiên trên thực tế, người ta quan tâm đến việc vận hành nhiều máy tính cùng với nhau, cho nên chúng ta có thể ngầm hiểu là các process này chạy trên các máy tính riêng biệt.</p>
+<p>Vậy <strong>tại sao chúng ta cần tìm hiểu về DS</strong>? DS xuất hiện rất phổ biến trên thực tế. Hầu hết các ứng dụng ngày nay, đặc biệt là các ứng dụng Internet, đều được triển khai dưới dạng DS. Việc triển khai phần mềm, đặc biệt là những hệ thống lớn, trên nhiều đơn vị máy tính (thay vì chỉ dùng một máy tính duy nhất) có rất nhiều lợi ích, VD như:</p>
+<ul>
+<li>Cung cấp nhiều tài nguyên hơn khi hệ thống cần xử lý lượng công việc lớn hơn.</li>
+<li>Chỉ dùng một đơn vị máy tính đồng nghĩa với rủi ro phần mềm bị sập (crash) nếu máy đó gặp sự cố. Dùng nhiều đơn vị máy sẽ cho phép bạn tiếp tục vận hành phần mềm kể cả khi sự cố xảy ra.</li>
+<li>Khi hệ thống của bạn trở nên phức tạp và cần sự kết hợp từ nhiều thành phần khác nhau, sử dụng DS cho phép bạn chia nhỏ một hệ thống to thành nhiều đơn vị nhỏ. Mỗi đơn vị có thể hoạt động độc lập, thậm chí có thể được phát triển bởi các team khác nhau với các chuyên môn khác nhau.</li>
+<li>Người dùng hệ thống có thể có sự phân tán về mặt địa lý trên toàn cầu. Để đảm bảo chất lượng dịch vụ và hạn chế độ trễ thì hệ thống máy cũng cần được phân tán để có thể có mặt ở gần người dùng nhất có thể.</li>
+</ul>
+<h2 id="xay-dung-distributed-systems-co-gi-kho">Xây dựng Distributed Systems có gì khó ?</h2>
+<p>Tuy mang đến nhiều lợi ích như kể trên, DS cũng làm cho việc phát triển và vận hành trở nên phức tạp hơn, do đặc tính phân tán của nó. Để xây dựng một hệ thống DS hoạt động tốt, chúng ta sẽ phải giải quyết rất nhiều bài toán, tùy thuộc vào đặc thù của hệ thống đó. Có thể kể ra một vài bài toán thường gặp như:</p>
+<ul>
+<li>Bài toán về xử lý sự cố (failure): Với một hệ thống máy tính lớn thì việc máy móc gặp trục trặc hay sự cố là điều thường xuyên xảy ra. Xử lý sự cố để không làm ảnh hưởng đến hệ thống (hoặc ít ra là giảm thiểu ảnh hưởng) là vấn đề cốt lõi nhất trong việc xây dựng DS.</li>
+<li>Vấn đề đồng thuận về dữ liệu (consensus): Xây dựng DS đồng nghĩa với việc dữ liệu của hệ thống cũng sẽ bị phân tán. Điều này gây ra trở ngại nếu chúng ta muốn hệ thống làm việc như một thực thể thống nhất, vì các máy đôi khi sẽ bất đồng với nhau về mặt dữ liệu.</li>
+<li>Vấn đề bất đồng bộ về mặt thời gian: Mỗi máy tính trong hệ thống có một đồng hồ riêng biệt, và không nhất quán với nhau về mặt thời gian. Đồng hồ máy tính cũng thường xuyên xảy ra tình trạng chạy lệch pha (clock drift). Sự bất đồng bộ này có thể dẫn đến sai lệch về mặt logic của hệ thống. VD như, nếu một ứng dụng nhắn tin không thống nhất được về mặt thời gian, thứ tự tin nhắn của người dùng có thể sẽ sai lệch giữa người dùng này với người dùng kia.</li>
+<li>Các vấn đề khác như vấn đề bảo mật, vấn đề giao tiếp, vấn đề lưu trữ và sao lưu dữ liệu...</li>
+</ul>
+<p>Có một điều thú vị trong lĩnh vực DS, đó là các bài toán kể trên hầu như không có lời giải lý thuyết nào đáp ứng được yêu cầu một cách hoàn hảo trên (sẽ được bàn luận sâu hơn trong các bài sau). Tuy nhiên điều này không có nghĩa là chúng không có những cách giải quyết phù hợp trong thực tế, tùy vào từng hệ thống cụ thể. Hầu hết các tiến triển gần đây trong lĩnh vực DS đều nhắm đến việc xây dựng những lời giải thực tế cho những hệ thống với mục đích cụ thể.</p>
+<h2 id="cac-kieu-su-co-trong-distributed-systems">Các kiểu sự cố trong Distributed Systems</h2>
+<p>Như đã nói ở trên, sự cố trong vận hành hệ thống xảy ra một cách thường xuyên. Sau đây là đoạn lược dịch lời <strong>Jeff Dean</strong>, một kĩ sư trưởng tại Google:</p>
+<blockquote class="blockquote">
+<p>Trong trung tâm dữ liệu (data center) của Google, mỗi năm một cluster sẽ xảy ra khoảng 1000 sự cố máy, hàng ngàn sự cố ổ cứng, trung bình một sự cố về nguồn điện khiến cho khoảng 500-1000 server bị sập trong vòng khoảng 6 tiếng đồng hồ. Ngoài ra, trung bình 5 rack sẽ gặp trục trặc, làm mất đi một nửa số packet được truyền tải, làm ảnh hưởng đến khoảng 5% số server tại bất kì thời điểm nào.</p>
+</blockquote>
+<p>Vì sự cố xảy ra thường xuyên như vậy, nên các hệ thống DS cần có cơ chế tự động xử lý khi gặp phải tình huống xấu, vì không phải lúc nào con người cũng có thể can thiệp một cách kịp thời. Để giải quyết được vấn đề này thì chúng ta cần hiểu được hệ thống có thể gặp phải những kiểu sự cố nào.</p>
+<h3 id="su-co-ve-may-node-failure">Sự cố về máy (node failure)</h3>
+<p>Mỗi máy tính vật lý, do nhiều nguyên nhân khác nhau, có thể gặp sự có trong khi hoạt động. Người ta chia các sự cố này thành một vài loại chính:</p>
+<ul>
+<li><strong>Fail-stop</strong>: Đây là kiểu sự cố khiến cho process trên máy dừng hoạt động (dừng tính toán cũng như truyền nhận tin). Nguyên nhân sự cố này có thể do máy bị sập (lỗi phần mềm, lỗi hệ điều hành ...), lỗi phần cứng, hay những nguyên nhân bên ngoài (vd như mất điện chẳng hạn). Đây là kiểu sự cố thường gặp nhất, nên khi người ta nói đến 'failure' mà không nhắc gì thêm thì thường được ngầm hiểu là kiểu sự cố này. Hầu hết các thuật toán được phát triển trong DS đều nhằm đối phó với kiểu sự cố này.</li>
+<li><strong>Fail-recover</strong>: Process có thể ngừng hoạt động trong một thời gian nhất định, nhưng sau đó phục hồi hoạt động trở lại. Nguyên nhân của kiểu sự cố này có thể là do máy tự động reboot do một nguyên nhân nào đó. Thường khi nhắc đến kiểu sự cố này, người ta mặc đình rằng máy có khả năng lưu trữ thông tin vào ổ đĩa cứng và phục hồi thông tin này sau khi sự cố xảy ra.</li>
+<li><strong>Byzantine failure</strong>: Sự cố mà máy tính không hoạt động theo đúng yêu cầu đề ra. VD như, máy có thể gửi tin tùy ý, hay thay đổi trạng thái tùy ý, không giống những gì được lập trình. Đây là kiểu sự cố <em>khó chịu</em> nhất, có thể xảy ra khi hệ thống gặp trục trặc không rõ nguyên nhân (vd như RAM có thể bị hỏng khiến xảy ra tình trạng bit-flip), hay do hệ thống bị kể xấu tấn công.</li>
+</ul>
+<h3 id="su-co-ve-network">Sự cố về network</h3>
+<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/network_partition.JPG" class="img-fluid" alt="alt text" title="Logo Title Text 1" />
+Mạng máy tính cũng là một sản phẩm vật lý và vì vậy cũng có thể xảy ra sự cố. Một kiểu sự cố thường gặp là sự cố &quot;chia cắt mạng&quot; (<strong>network partitioning</strong>), được mô phỏng bởi hình trên. Sự cố này xảy ra đường truyền của một hoặc nhiều server bị chia cắt khỏi phần còn lại của hệ thống, khiến hệ thống bị chia cắt thành nhiều phần không thể giao tiếp với nhau.
+Trên thực tế, trong các data center, một cluster máy chủ thường được kết nối với nhau bởi một hoặc nhiều cục switch. Sự cố của cổng switch hoặc dây dẫn có thể dẫn đến việc một hay nhiều server bị ngắt kết nối, dẫn đến tình trạng partitioning kể trên.</p>
+<p>Ngoài ra, một vài sự cố mạng khác có thể kể ra như việc latency bị tăng cao (do congestion control), hay network adapter của các server gặp trục trặc ...</p>
+<h3 id="thiet-ke-distributed-systems-e-san-sang-xu-ly-cac-su-co">Thiết kế Distributed Systems để sẵn sàng xử lý các sự cố</h3>
+<p>Do sự cố xảy ra thường xuyên và đa dạng như đã kể trên, hệ thống DS cần được thiết kế để có cơ chế tự động xử lý sự cố, đảm bảo việc vận hành không bị gián đoạn hay sai sót. Sau đây mình sẽ trích đoạn một bài báo khoa học có tên là <a href="https://www.usenix.org/legacy/event/lisa07/tech/full_papers/hamilton/hamilton.pdf">&quot;Về việc thiết kế và triển khai các dịch vụ Internet&quot;</a>, của tác giả <strong>James Hamilton</strong> (khi đó làm việc tại Microsoft, hiện tại là kĩ sư trưởng tại Amazon Web Service):</p>
+<blockquote class="blockquote">
+<p><strong>Thiết kế hệ thống để xử lý sự cố</strong> là khái niệm cốt lõi khi phát triển các dịch vụ quy mô lớn, bao gồm nhiều thành phần nhỏ. Những thành phần này sẽ thường xuyên gặp sự cố, và đôi khi sự cố này có thể dẫn đến sự cố kia. Khi hệ thống được triển khai trên khoảng 10,000 server và 50,000 đơn vị đĩa cứng, sự cố sẽ xảy ra nhiều lần trong một ngày. Nếu sự cố nào cũng cần đến con người can thiệp, hệ thống sẽ không thể vận hành một cách trơn tru và tiết kiệm được chi phí. Do đó, hệ thống cần có cơ chế đối phó với sự cố mà không cần con người can thiệp. Cơ chế này cần được kiểm tra một cách thường xuyên. Một cách đơn giản để kiểm tra là cố tình gây ra sự cố thường xuyên trong quá trình vận hành hệ thống. Điều này thoạt nghe có vẻ vô lý, tuy nhiên, nếu cơ chế sự cố không thường xuyên được sử dụng thì chúng sẽ không hoạt động khi cần thiết.</p>
+</blockquote>
+<p>Nói thế để thấy rằng, khi phát triển một hệ thống DS, vấn đề sự cố luôn phải được coi như một phần của bài toán, và chúng ta tuyệt đối không được mặc định rằng sự cố không bao giờ xảy ra.</p>
+<h2 id="mot-vai-tai-lieu-uong-link-e-tim-hieu-sau-them-ve-distributed-systems">Một vài tài liệu &amp; đường link để tìm hiểu sâu thêm về Distributed Systems</h2>
+<p>Distributed Systems là một lĩnh vực tương đối sâu rộng và trong một vài bài viết thì khó mà chúng ta có thể đề cập chi tiết hết về các chủ đề được. Sau đây mình chia sẻ một vài nguồn thông tin để các bạn có thể tìm hiểu sâu hơn về lĩnh vực này:</p>
+<ul>
+<li>Khóa <strong>Distributed Systems</strong> của MIT được ghi lại trên YouTube: <a href="https://www.youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB">https://www.youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB</a></li>
+<li>Kênh <strong>Distributed Systems Course</strong> trên Youtube: <a href="https://www.youtube.com/user/cbcolohan">https://www.youtube.com/user/cbcolohan</a></li>
+<li>Khóa học <strong>Reliable Distributed Algorithms</strong> (miễn phí): <a href="https://courses.edx.org/courses/course-v1:KTHx+ID2203.1x+3T_2017/course/">phần 1</a> và <a href="https://courses.edx.org/courses/course-v1:KTHx+ID2203.2x+2016T4/course/">phần 2</a></li>
+</ul>
+<p>Trong phần sau, mình sẽ bàn về bài toán đồng thuận (Consensus), một bài toán cơ bản nhất trong Distributed Systems.</p>
+
+
+
+                                </div>
+                        </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Footer -->
+                <footer>
+                        <div class="container">
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="copyright text-muted">
+                        Copyright © 2020
+                        <br />
+                            <a href="/feed.rss"><i class="fa fa-rss"></i> RSS Feed</a>
+                        |
+                            <a href="/feed.atom"><i class="fa fa-rss"></i> Atom Feed</a>
+                        <br />
+                        <strong><a href="https://wyam.io">Generated by Wyam</a></strong>
+                    </p>
+                </div>
+        </div>
+</div>
+
+                </footer> 
+
+                <script src="/assets/js/jquery.min.js"></script>
+                <script src="/assets/js/bootstrap.min.js"></script>     
+                <script src="/assets/js/highlight.pack.js"></script>   
+                <script src="/assets/js/clean-blog.js"></script>
+                <script src="/assets/js/d3.v3.min.js"></script>
+                <script src="/assets/js/trianglify.min.js"></script>
+                <script src="/assets/js/Please-compressed.js"></script>
+                <script src="/assets/js/background-check.min.js"></script>
+
+                <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                        <script src="/assets/js/html5shiv.js"></script>
+                        <script src="/assets/js/respond.min.js"></script>
+                <![endif]-->
+                
+                
+                <script>hljs.initHighlightingOnLoad();</script>
+
+                        <script type="text/javascript">                
+                                // Header background                        
+                                var colors = Please.make_color({
+                                        colors_returned: 3,
+                                        saturation: .6
+                                });
+                                var t = new Trianglify({
+                                        x_gradient: colors,
+                                        y_gradient: ["#FFFFFF"]
+                                });
+                                var header = document.getElementById("intro-header");
+                                var pattern = t.generate(header.clientWidth, header.clientHeight);
+                                header.setAttribute('style', 'background-image: ' + pattern.dataUrl);                        
+                        </script>
+
+                <script>
+                        BackgroundCheck.init({
+                                targets: '.intro-header,.navbar',
+                                images: '.intro-header'
+                        });
+                </script>
+        </body>
+</html>
+
