@@ -1,8 +1,8 @@
 #recipe Blog
 
 // Customize your settings and add new ones here
-Settings[Keys.Host] = "host.com";
-Settings[BlogKeys.Title] = "My Blog";
-Settings[BlogKeys.Description] = "Welcome!";
+Settings[Keys.Host] = "dhhoang.github.io";
+Settings[BlogKeys.Title] = "Huy Hoang blog";
+Settings[BlogKeys.Description] = "Huy Hoang's blog. Coding, engineering, science, and other stuffs";
 
 // Add any pipeline customizations here

@@ -174,5 +174,5 @@
     <package id="Wyam.Yaml" version="2.2.9" targetFramework="netcoreapp2.1" />
     <package id="Wyam.Web" version="2.2.9" targetFramework="netcoreapp2.1" />
   </package>
-  <package id="Wyam.Blog.CleanBlog" version="2.2.9" targetFramework="netcoreapp2.1" />
+  <package id="Wyam.Blog.Trophy" version="2.2.9" targetFramework="netcoreapp2.1" />
 </packages>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    @Html.Partial("_head") 
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <body>
+        <style>
+            h1,h2,h3,h4,h5,h6,blockquote {
+                font-family: 'IBM Plex Mono', monospace;
+            }
+        </style>
+        @Html.Partial("_Nav")
+    
+        <main role="main" class="🏆">
+            @RenderBody()
+        </main>
+
+        @Html.Partial("_footer") 
+  </body>
+</html>

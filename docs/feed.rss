@@ -1,28 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
 	<channel>
-		<title>My Blog</title>
-		<link>http://host.com/</link>
-		<description>Welcome!</description>
+		<title>Huy Hoang blog</title>
+		<link>http://dhhoang.github.io/</link>
+		<description>Huy Hoang's blog. Coding, engineering, science, and other stuffs</description>
 		<copyright>2020</copyright>
-		<pubDate>Thu, 27 Aug 2020 15:51:14 GMT</pubDate>
-		<lastBuildDate>Thu, 27 Aug 2020 15:51:14 GMT</lastBuildDate>
+		<pubDate>Thu, 27 Aug 2020 18:37:24 GMT</pubDate>
+		<lastBuildDate>Thu, 27 Aug 2020 18:37:24 GMT</lastBuildDate>
 		<item>
-			<title>First Post</title>
-			<link>http://host.com/posts/first-post</link>
-			<description>&lt;p&gt;This is my first post!&lt;/p&gt;</description>
-			<guid>http://host.com/posts/first-post</guid>
-			<pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;This is my first post!&lt;/p&gt;
-</content:encoded>
-		</item>
-		<item>
-			<title>First Post</title>
-			<link>http://host.com/posts/distributed-system-overview</link>
+			<title>[P1] Tổng quan về Distributed Systems</title>
+			<link>http://dhhoang.github.io/posts/distributed-system-overview</link>
 			<description>&lt;p&gt;Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.&lt;/p&gt;</description>
-			<guid>http://host.com/posts/distributed-system-overview</guid>
-			<pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.&lt;/p&gt;
+			<guid>http://dhhoang.github.io/posts/distributed-system-overview</guid>
+			<pubDate>Wed, 26 Aug 2020 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;h2 id="section"&gt;&lt;/h2&gt;
+&lt;p&gt;Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.&lt;/p&gt;
 &lt;h2 id="so-luoc"&gt;Sơ lược&lt;/h2&gt;
 &lt;p&gt;Một &amp;quot;hệ thống phân tán&amp;quot; (Distributed Systems-từ giờ xin được phép sử dụng từ gốc tiếng Anh) được định nghĩa là một tập hợp các tiến trình điện toán (process) độc lập, được kết nối với nhau bởi một hệ thống mạng (network) để các process này có thể truyền nhận thông tin  ('process' ở đây được định nghĩa là một đơn vị điện toán được vận hành với một không gian bộ nhớ-memory space-riêng biệt, không trùng lặp với các process khác). Các process này phối hợp hoạt động với nhau như một thực thể duy nhất đối với người dùng bên ngoài  nhằm thực thi một nhiệm vụ nào đó. Dựa theo định nghĩa này thì nhiều process trên cùng 1 máy tính cũng có thể được coi như Distributed Systems (DS). Dĩ nhiên trên thực tế, người ta quan tâm đến việc vận hành nhiều máy tính cùng với nhau, cho nên chúng ta có thể ngầm hiểu là các process này chạy trên các máy tính riêng biệt.&lt;/p&gt;
 &lt;p&gt;Vậy &lt;strong&gt;tại sao chúng ta cần tìm hiểu về DS&lt;/strong&gt;? DS xuất hiện rất phổ biến trên thực tế. Hầu hết các ứng dụng ngày nay, đặc biệt là các ứng dụng Internet, đều được triển khai dưới dạng DS. Việc triển khai phần mềm, đặc biệt là những hệ thống lớn, trên nhiều đơn vị máy tính (thay vì chỉ dùng một máy tính duy nhất) có rất nhiều lợi ích, VD như:&lt;/p&gt;

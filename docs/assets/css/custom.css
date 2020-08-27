@@ -1,0 +1,83 @@
+/** Base Variables */
+/** Base Settings/Overwrite Normalize */
+*, *:before, *:after { box-sizing: border-box; }
+
+body { font-family: "Inconsolata", monospace; font-feature-settings: 'liga' 0; font-size: 100%; line-height: 1.6; }
+
+@media (min-width: 20em) { body { font-size: 102.5%; } }
+
+@media (min-width: 30em) { body { font-size: 105%; } }
+
+@media (min-width: 54em) { body { font-size: 107.5%; } }
+
+@media (min-width: 64em) { body { font-size: 110%; } }
+
+@media (min-width: 76.5em) { body { font-size: 115%; } }
+
+@media (min-width: 114em) { body { font-size: 125%; } }
+
+h1, h2, h3, h4, h5, h6 { margin: 0; font-family: "Space Mono", monospace; line-height: 1.1; }
+
+@media (min-width: 54em) { h1 { font-size: 2.5em; } }
+
+@media (min-width: 76.5em) { h1 { font-size: 3em; } }
+
+h2 { margin-bottom: 0.25em; font-size: 1.75em; }
+
+@media (min-width: 54em) { h2 { font-size: 2em; } }
+
+h3 { margin-bottom: 0.1em; font-size: 1.5em; }
+
+h4 { margin-bottom: 0.1em; font-size: 1.25em; }
+
+p { margin: 0 0 0.75em; }
+
+a { color: #0a0a0a; text-decoration: none; transition: color 0.4s ease-in-out; }
+
+a:hover, a:active, a:focus { color: #9f8f68; }
+
+figure { margin: 0; }
+
+img { display: block; width: 100%; max-width: 100%; }
+
+blockquote { margin: 2em 0; font-family: "Space Mono", monospace; font-weight: 700; font-size: 1.25em; }
+
+cite { display: block; margin-top: 0.125em; font-family: "Inconsolata", monospace; font-weight: 400; font-style: normal; }
+
+cite:before { content: "\2014 \0020"; }
+
+ol, ul { margin: 0; padding: 0; }
+
+/** Text Selection */
+::selection { color: #fff; background-color: #9f8f68; text-shadow: none; }
+
+/** Underline Slide from left and back */
+/** Button Slide Need to still add hover state in parent element box-shadow: inset 175px 0 0 0 $color-alpha; color: $color-white; */
+/** Flex Grid */
+/** Box Shadow */
+.sidenav { height: 100%; /* 100% Full-height */ width: 0; /* 0 width - change this with JavaScript */ position: fixed; /* Stay in place */ z-index: 999; /* Stay on top */ top: 0; left: 0; background-color: #f8f9f9; /* Black*/ overflow-x: hidden; /* Disable horizontal scroll */ padding-top: 60px; /* Place content 60px from the top */ transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */ }
+
+.sidenav a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #0a0a0a; display: block; transition: 0.3s; }
+
+.sidenav a span { position: relative; color: #0a0a0a; }
+
+.sidenav a span:after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; border-bottom: 3px solid #9f8f68; transition: width 0.4s ease-in-out; }
+
+.sidenav a span:hover:after { width: 100%; }
+
+/*.sidenav a span:hover, .offcanvas a span:focus{
+    border-bottom: 3px solid $color-alpha;
+}*/
+.sidenav .closebtn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; border: none; cursor: pointer; color: #0a0a0a; }
+
+main > .nav { top: 1.75em; }
+
+.nav { left: 4em !important; }
+
+@media (min-width: 30em) { left: 4em; }
+
+.nav.openbtn { left: 2em !important; position: fixed; top: 1.5em; cursor: pointer; }
+
+footer { bottom: 0; height: 60px; /* Height of the footer */ }
+
+.fa.fa-bars, .fa.fa-arrow-left { color: #9f8f68; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: black; }

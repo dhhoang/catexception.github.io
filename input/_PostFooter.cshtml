@@ -1,0 +1,16 @@
+<div id="hyvor-talk-view"></div>
+<script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = 1759; // DO NOT CHANGE THIS
+    var url = new URL(window.location.href);
+    url.hash = "";
+    url.search = "";
+    if(url.pathname.endsWith(".html")) {
+        url.pathname = url.pathname.substr(url.pathname.startsWith("/") ? 1:0 , url.pathname.indexOf(".html"));
+    }
+
+    var HYVOR_TALK_CONFIG = {
+        url: url.href,
+        id: url.pathname
+    };
+</script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
