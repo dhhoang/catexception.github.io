@@ -38,6 +38,9 @@
 </head>
  
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
     <body>
         <style>
             h1,h2,h3,h4,h5,h6,blockquote {
@@ -60,6 +63,7 @@
     
   <div>
 
+      <figure class="absolute-bg preview__img" style="background-image: url('/assets/images/background.jpg');"></figure>
       <figure class="absolute-bg preview__img" style="background-image: url('/assets/images/background.jpg');"></figure>
     <div class="previews__container">
         <h1>Huy Hoang&#x27;s blog. Coding, engineering, science, and other stuffs</h1>
@@ -87,6 +91,18 @@
         <span class="preview__more">Read More</span>
       </a>
     </li>
+    <li class="preview">
+      <a class="preview__link" href="/posts/design-tinyurl">
+        <span class="preview__date">Monday, August 10, 2020</span>
+        <h2 class="preview__header">Designing TinyURL: it&#x27;s more complicated than you think</h2>    
+      </a>
+      <div class="preview__link preview__excerpt" style="padding-top: 0; padding-bottom: 0;">
+        <p>How would you design a service like <a href="https://tinyurl.com/">TinyURL</a> or <a href="https://bitly.com/">Bitly</a> ?</p>
+      </div>
+      <a class="preview__link" href="/posts/design-tinyurl">
+        <span class="preview__more">Read More</span>
+      </a>
+    </li>
 </ul>
     <div class="pagination">
 
@@ -105,6 +121,15 @@
     </div>
     <div class="tab">
   <ul class="cards">
+      <li class="card">
+        <a class="card__link" href="/tags/distributed-systems-design">
+          <div class="card__container">
+            <h2 class="card__header">distributed-systems design</h2>
+            <p class="card__count">1 Posts</p>
+            <span class="card__more">View All</span>
+          </div>
+        </a>
+      </li>
       <li class="card">
         <a class="card__link" href="/tags/distributed-systems">
           <div class="card__container">

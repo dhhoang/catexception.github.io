@@ -38,6 +38,9 @@
 </head>
  
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
     <body>
         <style>
             h1,h2,h3,h4,h5,h6,blockquote {
@@ -55,7 +58,7 @@
     
     
         <main role="main" class="🏆">
-            <article>
+            <article class="language-shell">
     <style>
     .post p:first-child {
         font-size: 0.8em;
@@ -87,8 +90,7 @@
   </header>
   <section class="section-padding bg-grey">
     <div class="post">
-      <h2 id="section"></h2>
-<p>Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.</p>
+      <p>Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.</p>
 <h2 id="so-luoc">Sơ lược</h2>
 <p>Một &quot;hệ thống phân tán&quot; (Distributed Systems-từ giờ xin được phép sử dụng từ gốc tiếng Anh) được định nghĩa là một tập hợp các tiến trình điện toán (process) độc lập, được kết nối với nhau bởi một hệ thống mạng (network) để các process này có thể truyền nhận thông tin  ('process' ở đây được định nghĩa là một đơn vị điện toán được vận hành với một không gian bộ nhớ-memory space-riêng biệt, không trùng lặp với các process khác). Các process này phối hợp hoạt động với nhau như một thực thể duy nhất đối với người dùng bên ngoài  nhằm thực thi một nhiệm vụ nào đó. Dựa theo định nghĩa này thì nhiều process trên cùng 1 máy tính cũng có thể được coi như Distributed Systems (DS). Dĩ nhiên trên thực tế, người ta quan tâm đến việc vận hành nhiều máy tính cùng với nhau, cho nên chúng ta có thể ngầm hiểu là các process này chạy trên các máy tính riêng biệt.</p>
 <p>Vậy <strong>tại sao chúng ta cần tìm hiểu về DS</strong>? DS xuất hiện rất phổ biến trên thực tế. Hầu hết các ứng dụng ngày nay, đặc biệt là các ứng dụng Internet, đều được triển khai dưới dạng DS. Việc triển khai phần mềm, đặc biệt là những hệ thống lớn, trên nhiều đơn vị máy tính (thay vì chỉ dùng một máy tính duy nhất) có rất nhiều lợi ích, VD như:</p>
@@ -159,10 +161,9 @@ Trên thực tế, trong các data center, một cluster máy chủ thường đ
             id: url.pathname
         };
     </script>
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
+  <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </article>
+
 
 <footer class="section-padding--sm footer">
   <span>

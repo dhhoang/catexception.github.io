@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Huy Hoang blog - Designing TinyURL: it&#x27;s more complicated than you think</title>
+  <meta name="description" content="Huy Hoang&#x27;s blog. Coding, engineering, science, and other stuffs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <link type="application/rss+xml" rel="alternate" title="Huy Hoang blog" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" title="Huy Hoang blog" href="/feed.atom" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Lora|Space+Mono:700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="/assets/css/main.css" rel="stylesheet" />
+  <link href="/assets/css/custom.css" rel="stylesheet" />
+
+  <meta name="application-name" content="Huy Hoang blog" />
+  <meta name="msapplication-tooltip" content="Huy Hoang blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Huy Hoang blog - Designing TinyURL: it&#x27;s more complicated than you think" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://dhhoang.github.io/posts/design-tinyurl" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/assets/js/html5shiv.js"></script>
+      <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+ 
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
+    <body>
+        <style>
+            h1,h2,h3,h4,h5,h6,blockquote {
+                font-family: 'IBM Plex Mono', monospace;
+            }
+        </style>
+        <div class="sidenav">
+  <a class="closebtn"><i class="fa fa-times"></i></a>
+  <h2><a class="" href="/"><span>Huy Hoang&#x27;s blog. Coding, engineering, science, and other stuffs</span></a></h2>
+                <a class="" href="/about"><span>About Me</span></a>
+</div>
+<a class="nav openbtn">
+      <i class="fa fa-bars fa-2x"></i>
+    </a>
+    
+    
+        <main role="main" class="🏆">
+            <article class="language-shell">
+    <style>
+    .post p:first-child {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1em;
+        background: #f9f9f9;
+        border-left: 7px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0 10px;
+        font-weight: 400;
+    }
+    </style>
+
+  <header class="section-padding--lg mast rellax" data-rellax-speed="-4">
+    <a class="nav nav--white" href="/">
+      <i class="fa fa-lg fa-arrow-left"></i>
+      <span>Back to Posts</span>
+    </a>
+    <figure class="absolute-bg mast__img" style="background-image: url('/assets/images/background.jpg');"></figure>
+    <div class="mast__container">
+      <span><time datetime="YYYY-08-DD">Monday, August 10, 2020</time></span>
+       <h1>Designing TinyURL: it&#x27;s more complicated than you think</h1>   
+              <span>
+                    <a class="nav--white" href="/tags/distributed-systems-design">distributed-systems design</a>
+        </span>
+    </div>
+  </header>
+  <section class="section-padding bg-grey">
+    <div class="post">
+      <p>How would you design a service like <a href="https://tinyurl.com/">TinyURL</a> or <a href="https://bitly.com/">Bitly</a> ?</p>
+<p>Recently I came across a Youtube video called: <a href="https://www.youtube.com/watch?v=fMZMm_0ZhK4"><strong>System Design : Design a service like TinyUrl</strong></a>, from the channel <strong>Tushar Roy - Coding Made Simple</strong>. This video discusses a common developer interview question, namely, how do you design a service like TinyURL, which allows users to turn long URLs into short ones that are just several characters long (<a href="https://www.youtube.com/watch?v=fMZMm_0ZhK4">https://www.youtube.com/watch?v=fMZMm_0ZhK4</a>).
+Basically, a TinyURL-like service would have 2 main APIs: <code>createShort(longUrl)</code> and <code>getLong(shortUrl)</code>. The second one is easy, you simply need to do a lookup and return the long URL (or 404 if none exists). The main problem is the <code>createShort()</code> API: How do you generate a short sequence of characters that is unique among URLs (note that <em>uniqueness</em> is an important property, we don't want different URLs to have the same shortcut).</p>
+<p>Tushar's proposed solutions are quite good and I think most interviewers would be satisfied with them (please watch the video before continuing to read this post). That being said, they are sort of unsatisfying. To summarize, the most sophisticated solution proposed in the video is to partition all possible short sequences into ranges, and use a set of servers to return a monotonically increasing sequence, which falls within a range. Each server would be in assigned only one particular range to work with, and <a href="https://zookeeper.apache.org/">Apache Zookeeper</a> is used to coordinate the sequence range assignments.
+If the each server has a unique range, then they are guaranteed to generate unique sequences.
+<img src="https://dev-to-uploads.s3.amazonaws.com/i/66rjp2ympf34jjdy5xkj.png" class="img-fluid" alt="Design Tiny-URL like service using Zookeeper" />
+The reason I think this answer is unsatisfying is because, while it works, it simply shifts the responsibility of generating the &quot;unique&quot; part of the sequence, which, is the hardest part of the problem, to Zookeeper. Instead of answering the question &quot;how to generate a unique sequence?&quot; (or sequence range, in this case), this solution simply says &quot;I'll just ask Zookeeper to give me one&quot;. But how does Zookeeper do that?</p>
+<p>First of all, why is it so hard to generate a unique sequence? Afterall, I can use a single computer to keep increasing a counter, and that would be unique, right? In fact, that solution is mentioned by Tushar in the video, but later rejected, because the counter-generating server might fail (either the machine itself crashes, or the network might go down etc.), and Zookeeper, somehow, magically provides &quot;high availability&quot; (i.e. it is resilient to failures).</p>
+<p>And that's the gist of the problem. If I had the guarantee that my servers <em>never</em> fails, then I wouldn't need Zookeeper. I probably wouldn't need multiple servers either, one beefy machine might be enough to do the job. Unfortunately, in practice machines do fail, and in fact, they fail <em>all the time</em>. That is why when we design systems, we <a href="https://www.usenix.org/legacy/event/lisa07/tech/full_papers/hamilton/hamilton_html/index.html">design for failure</a>. In this case, when one servers in the Zookeeper cluster fails, somehow the system needs to make sure that the others don't return a duplicate range. The only way to do that is to make all servers agree on which ranges have been given, and which have not.</p>
+<p>So let's try to simplify &amp; generalize the problem: given a set of servers, how do we ensure that all servers agree on a value, even if the servers might fail randomly (the <em>value</em> in this case would be the range assignment). This is know as the <em>distributed consensus problem</em>, which actually is one of the hardest problems in Distributed systems. In fact, it has been mathematically proven that, in an asynchronous system (meaning a system where we don't know how long it takes for messages to travel between servers), there is <strong>NO</strong> way to guarantee distributed consensus. This is known as the FLP Impossibility.</p>
+<p>Fortunately, in most of the systems in practice, we can workaround this issue by modelling them as &quot;partially synchronous systems&quot;, that is, we can apply a boundary on how long it takes to send messages between servers. And in this model, consensus is possible. There are several algorithms that can be used to get consensus, like <a href="https://www.cs.rutgers.edu/%7Epxk/417/notes/paxos.html">Paxos</a> or <a href="https://raft.github.io/">Raft</a>. Zookeeper itself uses a consensus protocol called <a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/Zab1.0">Zab</a> (which stands for Zookeeper atomic broadcast).</p>
+<p>I won't get into details on how these algorithms work. Afterall, they are quite complicated and sometimes difficult to understand. However if you ever need to work with those directly, an important thing to pay attention to is that they are not perfect. Raft and Paxos, for example, only works if the number of failed nodes is less than half the total number of nodes in the system. Failure also take different forms, and while Paxos and Raft works well with Fail-stop and Fail-safe types of failure, Byzantine-type failures are a lot harder to deal with.</p>
+ 
+    </div>
+          
+  </section>
+
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 1759; // DO NOT CHANGE THIS
+        var url = new URL(window.location.href);
+        url.hash = "";
+        url.search = "";
+        if(url.pathname.endsWith(".html")) {
+            url.pathname = url.pathname.substr(url.pathname.startsWith("/") ? 1:0 , url.pathname.indexOf(".html"));
+        }
+
+        var HYVOR_TALK_CONFIG = {
+            url: url.href,
+            id: url.pathname
+        };
+    </script>
+  <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</article>
+
+ <section class="next">
+    <a class="next__link" href="/posts/distributed-system-overview" style="background-image: url('/assets/images/background.jpg');">
+      <div class="next__container">
+        <span>Read Next</span>
+        <h2>[P1] T&#x1ED5;ng quan v&#x1EC1; Distributed Systems</h2>
+      </div> 
+    </a>
+  </section>
+
+<footer class="section-padding--sm footer">
+  <span>
+  </span>
+  <ul class="footer__social">
+    <li><a class="fa fa-lg fa-rss" href="/feed.rss" target="_blank"></a></li>
+  </ul>
+</footer>
+
+
+        </main>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rellax/1.0.0/rellax.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
+<script type="text/javascript" src="/assets/js/nav.js"></script>
+ 
+  </body>
+</html>

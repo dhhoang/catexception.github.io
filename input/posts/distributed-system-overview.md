@@ -2,7 +2,6 @@ Title: "[P1] Tổng quan về Distributed Systems"
 Published: August 26 2020
 Tags: distributed-systems
 ---
-##
 Đây là bài viết mở đầu trong series bài viết về đề tài Distributed Systems. Dự định của mình là sẽ thực hiện loạt bài viết tương đối chuyên sâu về các chủ đề: Distributed Systems, Microservices, Transactions, Event sourcing, CQRS, Domain Driven Design, và nếu có thời gian, có thể sẽ đề cập đến cả Blockchain nữa.
 
 ## Sơ lược

@@ -11,7 +11,7 @@
           nextPostImage = nextPost.Get<string>(BlogKeys.Image) ?? "/assets/images/background.jpg";
         }
 }
-<article>
+<article class="language-shell">
     <style>
     .post p:first-child {
         font-size: 0.8em;
@@ -83,10 +83,9 @@
             id: url.pathname
         };
     </script>
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
+  <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </article>
+
 @if(nextPost != null){
  <section class="next">
     <a class="next__link" href="@Context.GetLink(nextPost)" style="background-image: url('@nextPostImage');">
