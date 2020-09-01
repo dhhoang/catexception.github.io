@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Huy Hoang blog - [P2] B&#xE0;i to&#xE1;n &#x111;&#x1ED3;ng thu&#x1EAD;n trong Distributed Systems</title>
+  <meta name="description" content="Huy Hoang&#x27;s blog. Coding, Engineering, Science, and other stuffs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <link type="application/rss+xml" rel="alternate" title="Huy Hoang blog" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" title="Huy Hoang blog" href="/feed.atom" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Lora|Space+Mono:700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="/assets/css/main.css" rel="stylesheet" />
+  <link href="/assets/css/custom.css" rel="stylesheet" />
+
+  <meta name="application-name" content="Huy Hoang blog" />
+  <meta name="msapplication-tooltip" content="Huy Hoang blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Huy Hoang blog - [P2] B&#xE0;i to&#xE1;n &#x111;&#x1ED3;ng thu&#x1EAD;n trong Distributed Systems" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://dhhoang.github.io/posts/consensus-problem-vi" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/assets/js/html5shiv.js"></script>
+      <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+ 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Oswald:wght@400;500;700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
+    <body>
+        <style>
+            h1,h2,h3,h4,h5,h6 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 500;
+            }
+
+            blockquote {
+                font-family: 'Roboto Mono', monospace;
+            }
+        </style>
+        <div class="sidenav">
+  <a class="closebtn"><i class="fa fa-times"></i></a>
+  <h2><a class="" href="/"><span>Huy Hoang&#x27;s blog. Coding, Engineering, Science, and other stuffs</span></a></h2>
+                <a class="" href="/about"><span>About Me</span></a>
+</div>
+<a class="nav openbtn">
+      <i class="fa fa-bars fa-2x"></i>
+    </a>
+    
+    
+        <main role="main" class="🏆">
+            <article class="language-shell">
+    <style>
+    .post p:first-child {
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    blockquote {
+        font-size: 1em;
+        background: #f9f9f9;
+        border-left: 7px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0 10px;
+        font-weight: 400;
+    }
+    </style>
+
+  <header class="section-padding--lg mast rellax" data-rellax-speed="-4">
+    <a class="nav nav--white" href="/">
+      <i class="fa fa-lg fa-arrow-left"></i>
+      <span>Back to Posts</span>
+    </a>
+    <figure class="absolute-bg mast__img" style="background-image: url('/assets/images/background.jpg');"></figure>
+    <div class="mast__container">
+      <span><time datetime="YYYY-09-DD">Tuesday, September 1, 2020</time></span>
+       <h1>[P2] B&#xE0;i to&#xE1;n &#x111;&#x1ED3;ng thu&#x1EAD;n trong Distributed Systems</h1>   
+              <span>
+                    <a class="nav--white" href="/tags/consensus">consensus</a>
+,                    <a class="nav--white" href="/tags/distributed-systems">distributed-systems</a>
+        </span>
+    </div>
+  </header>
+  <section class="section-padding bg-grey">
+    <div class="post">
+      <p>Ví dụ về Distributed Systems được phát triển và sử dụng trong thực tế bao gồm hệ thống Database (SQL, NoSQL), hệ thống Cache (Redis, Memcached), hệ thống Message-Queue hay Publish/Subscribe (Kafka, RabbitMQ ...). Những hệ thống này tuy có những tính năng khác nhau, tuy nhiên phần cốt lõi của chúng đều phải giải quyết một vấn đề cơ bản, đó là bài toán <strong>đồng thuận</strong>.</p>
+<p>Như đã đề cập ở <a href="/posts/distributed-system-overview">phần 1</a>, một trông những tính chất của Distributed System là khả năng hoạt động như một thực thể thống nhất đối với người sử dụng. Để đạt được mục đích này thì trong quá trình hoạt động, các process trong hệ thống cần có được sự nhất trí về trạng thái dữ liệu (state) cũng như các bước vận hành tiếp theo (action). Do các process có thể không nằm cùng trên một máy tính vật lý nên chúng buộc phải giao tiếp qua network để đạt được sự nhất trí này. Tuy nhiên, cả máy tính lẫn network đều có thể gặp phải các sự cố, khiến cho việc giao tiếp để đảm bảo sự đồng nhất giữa các process trở nên không đơn giản.</p>
+<p>Cách đạt được sự nhất trí giữa các process trong Distributed Systems, kể cả khi gặp sự cố, được gọi là bài toán đồng thuận (Distributed Consensus). Để hiểu rõ hơn bài toán này, trong bài viết này chúng ta sẽ bàn về hai ví dụ mang tính minh họa.</p>
+<h2 id="bai-toan-hai-vi-tuong-two-generals-problem">Bài toán hai vị tướng (Two generals problem)</h2>
+<p>Bài toán được phát biểu như sau: Có 2 vị tướng chỉ huy 2 đạo quân đóng ở các địa điểm khác nhau và cùng đối đầu với một đội quân đối phương. Hai vị tướng này cần đi đến một quyết định: cùng tấn công đối phương, hoặc cùng rút lui. Nếu họ cùng tấn công đối phương thì sẽ giành thắng lợi, nếu họ cùng rút lui thì sẽ bảo toàn được lực lượng. Ngược lại nếu hai vị tướng ra quyết định trái ngược (1 tấn công, 1 rút lui) thì họ sẽ bị đối phương đánh bại. Hai vị tướng có thể dùng giao liên để gửi thư cho nhau, tuy nhiên mỗi giao liên đều có khả năng bị đối thử bắt giữ, dẫn đến việc lá thư sẽ không được vận chuyển. Vậy 2 vị tướng trên cần dùng giao thức nào để có thể đi đến hành động thống nhất?</p>
+<blockquote class="blockquote">
+<p>Trước khi tiếp tục bài viết, mình khuyến khích các bạn hãy thử tự tìm cách giải cho bài toán này. Về cơ bản, bài toán yêu cầu một trong hai vị tướng phải đề xuất ra hành động và gửi thư cho vị tướng còn lại để yêu cầu sự nhất trí. Tuy nhiên, làm cách nào để vị tướng đề xuất đó biết được rằng thông tin đã đến được tay vị tướng kia hay chưa?</p>
+</blockquote>
+<p>Đối với những bạn có hiểu biết về mảng Computer Networking, có thể bạn sẽ nhận thấy bài toán này có nhiều điểm tương đồng với giao thức TCP/IP, là giao thức mạng được phát triển nhằm cho phép người gửi tin có thể đảm bảo rằng thông tin đã đến được phía người nhận. Chúng ta có thể áp dụng cách tiếp cận tương tự cho bài toán này, dựa trên giao thức DATA/ACK của TCP/IP. Một vị tướng (<code>G1</code>) sẽ đề xuất phương án và gửi thông tin cho người còn lại (<code>G2</code>). Khi nhận được thư, <code>G2</code> sẽ thực hiện theo phương án được đề xuất và gửi thư xác nhận (ACK) cho <code>G1</code>. Nếu <code>G1</code> nhận được thư xác nhận, <code>G1</code> cũng sẽ thực hiện phương án đó.</p>
+<p>Tuy nhiên, những mẩu thư liên lạc kể trên đều có thể bị mất dọc đường, theo như điều kiện của bài toán. Nếu thư <code>G1-&gt;G2</code> bị mất, <code>G2</code> sẽ không nhận được đề xuất. Tệ hơn nữa, nếu thư ACK bị mất, <code>G2</code> sẽ tấn công trong khi <code>G1</code> vẫn chưa quyết định được hành động. Vậy chúng ta giải quyết trường hợp này ra sao? Câu trả lời ngắn gọn ở đây là, <strong>bài toán không có lời giải hoàn hảo</strong>. Thật vậy, đối phương trên lý thuyết có khả năng chặn được tất cả liên lạc giữa 2 vị tướng, và trong trường hợp đó sẽ không có cách nào đạt được sự đồng thuận cả.</p>
+<p>Ý nghĩa chính của bài toán 2 vị tướng có nhằm minh họa một điều, đó là không có lời giải &quot;hoàn hảo&quot; cho bài toán đồng thuận. Tuy nhiên, chúng ta có thể đưa ra một phương án mang tính &quot;thực tế&quot; hơn, bằng việc giả thiết rằng đối phương không phải lúc nào cũng có thể bắt được tất cả các thư liên lạc được gửi đi giữa 2 vị tướng. Theo đó, ta có thể cho <code>G1</code> gửi lại đề xuất nếu không nhận được ACK sau một thời gian nào đó, cho đến khi nhận được ACK từ <code>G2</code> (tương tự như cơ chế <em>retransmission</em> của TCP/IP).</p>
+<h2 id="bai-toan-cac-vi-tuong-byzantine-byzantine-generals-problem">Bài toán các vị tướng Byzantine (Byzantine General's problem)</h2>
+<p>Viết tắt là BGP, bài toán này được phát biểu như sau: Có <code>n</code> vị tướng đến từ Byzantine (tên một đế quốc thời trung cổ nằm tại vùng Thổ Nhĩ Kỳ và đông nam châu Âu ngày nay), mỗi người chỉ huy một đội quân, cùng bao vây một thành trì của đối phương. Họ cần đạt được sự nhất trí về phương án hành động: hoặc tấn công (<code>A</code>), hoặc rút lui (<code>R</code>). Các vị tướng có thể liên lạc với nhau bằng cách gửi thư qua giao liên một cách an toàn (thông tin liên lạc không bị mất hay đánh tráo). Tuy nhiên, một vài trong số <code>n</code> vị tướng này là gián điệp của đối phương, và có khả năng gửi những mẩu tin bất kì, nhằm ngăn cản việc nhất trí của các đội quân còn lại. Yêu cầu bài toán đặt ra là: 1) tìm ra một giao thức để các vị tướng (không phải gián điệp) có thể nhất trí về hành động (<code>A</code> hoặc <code>R</code>), 2) tìm hiểu xem số lượng gián điệp ảnh hưởng đến giao thức trên như thế nào?</p>
+<blockquote class="blockquote">
+<p>Bài toán này được nêu ra bởi nhà khoa học máy tính Leslie Lamport trong bài báo &quot;<a href="https://dl.acm.org/doi/10.1145/357172.357176">The Byzantine Generals Problem</a>&quot;, và tên gọi của kiểu sự cố &quot;Byzantine&quot; (xem lại phần 1) được đặt theo tên bài toán này. Có nhiều người hay nhầm lẫn giữa bài toán này và bài toán 2 vị tướng (2GP) được nêu ở phần trước. Hai bài toán có một vài điểm khác biệt. Thứ nhất, BGP có một số lượng đội quân bất kì (thay vì chỉ 2 như 2GP). Thứ nhì, cả 2 vị tướng trong 2GP đều &quot;trung thành&quot;, trong khi BGP có một hoặc nhiều vị tướng là gián điệp. Thứ ba, ở 2GP, việc liên lạc giữa 2 đạo quân có thể bị gián đoạn, trong khi ở BGP chúng ta coi như liên lạc giữa các vị tướng là hoàn hảo.</p>
+</blockquote>
+<p>Để đi đến lời giải, chúng ta hay thử bắt đầu lý luận từ một vài trường hợp đơn giản. Với <code>n=1</code>, bài toán trở nên tối giản, không có sự đồng thuận nào ở đây cả. Với <code>n=2</code>, ta có một lời giải tương đối đơn giản: một vị tướng sẽ đề xuất phương án <code>v</code> và gửi thư cho vị tướng còn lại, và cả 2 sẽ cùng thực hiện <code>v</code>. Do liên lạc giữa 2 vị tướng được đảm bảo, chắc chắn họ sẽ đạt được sự đồng thuận. Trong trường hợp một trong hai vị tướng là gián điệp, bất kì hành động nào của người còn lại đều hợp lệ.</p>
+<p>Bài toán trở nên phức tạp hơn khi <code>n=3</code>. Trong tình huống đơn giản nhất với <code>m=0</code> gián điệp, lời giải của chúng ta tương tự như trường hợp <code>n=2</code>. Một vị tướng <code>G1</code> sẽ đề xuất phương án hành động <code>v</code> và gửi thông tin cho các vị tướng còn lại. Các vị tướng còn lại khi nhận được tin sẽ thực hiện theo <code>v</code>. Vậy nếu <code>m=1</code> thì sao? Trong trường hợp này, người để xuất (<code>G1</code>) có thể là gián điệp và sẽ gửi những thông tin trái ngược nhau cho 2 vị tướng còn lại (<code>G2</code> và <code>G3</code>). Chúng ta có thể thử dùng liên lạc giữa <code>G2</code> và <code>G3</code> để xác nhận lại thông tin. Kể cả vậy, nếu <code>G1</code> là gián điệp, <code>G2</code> và <code>G3</code> vẫn sẽ nhận được những thông tin không thống nhất về phương án hành động <code>v</code>. Thật vậy, nếu <code>G1</code> gửi <code>A</code> cho <code>G2</code> và <code>R</code> cho <code>G3</code>, <code>G2</code> và <code>G3</code> sẽ nhận nhìn thấy những thông tin như sau:</p>
+<pre><code>// G2, G3 là các vector chứa thông tin phương án nhận được từ G1. Phần tử [0] là thông tin nhận được từ G1, [1] là thông tin nhận được từ vị tướng còn lại. 
+G2: [A R]
+G3: [R A]
+</code></pre>
+<p>Điều tương tự xảy ra khi <code>G2</code> hay <code>G3</code> là gián điệp. Điều này dẫn đến việc <code>G2</code> hoặc <code>G3</code> không xác định được gián điệp là ai, và không thể thống nhất được phương án <code>v</code>. Một cách tổng quát hơn, BGP không có lời giải cho trường hợp <code>n</code> vị tướng và <code>m</code> gián điệp nếu <code>3m &gt;=n </code>.</p>
+<p>Nói cách khác, BGP chỉ có thể giải được khi số gián điệp nhỏ hơn 1/3 số vị tướng (<code>3m &lt; n</code>). Thuật toán để giải bài toán này được gọi tên là <strong>Byzantine Fault Tolerance</strong> (BFT). Chi tiết về thuật toán (và cách chứng minh) tương đối phức tạp nên mình sẽ không trình bày ở đây (khuyến khích các bạn đọc thuật toán này trong bài báo của Lamport). Tuy nhiên mình sẽ tóm tắt một vài ý chính:</p>
+<ul>
+<li><strong>Ý tưởng</strong>: Các vị tướng được chia thành 2 vai trò: 1 vị tướng đóng vai trò chỉ huy (<code>C</code>), những người còn lại là các phó tướng (<code>L</code>). Chỉ huy sẽ đề xuất phương án <code>v</code> và các phó tướng sẽ làm theo. Để đạt được yêu cầu bài toán kể cả khi chỉ huy C là gián điệp, các phó tướng sẽ thông tin cho nhau biết xem phương án <code>v</code> mà mình nhận được là gì. VD, phó tướng <code>L3</code> sẽ gửi <code>v3</code> (nhận được từ <code>C</code>) cho các phó tướng còn lại. Sau khi quá trình này kết thúc, mỗi phó tướng <code>L</code> sẽ có được một vector các giá trị mà các phó tướng nhận được từ chỉ huy: <code>L = [v1 v2 ... v_(n-1)]</code>, và sẽ chọn giá trị nào chiếm đa số.</li>
+<li>Tuy nhiên, <code>L3</code> nói trên có thể là gián điệp và có thể gửi các giá trị <code>v3</code> khác nhau cho các phó tướng còn lại. Vậy trường hợp này giải quyết ra sao? Nếu <code>L3</code> là gián điệp thì <code>v3</code> thực tế vô nghĩa. Điều quan trọng duy nhất ở đây là các phó tướng (không phải gián điệp) <em>đồng thuận</em> với nhau về <code>v3</code>. Ta có thể đạt được sự đồng thuận này bằng cách giải một bài toán đồng thuận &quot;con&quot;, tương tự như bài toán gốc nhưng loại bỏ đi chỉ huy <code>C</code>. Thay vào đó, <code>L3</code> giờ đóng vai trò chỉ huy, nhằm mục đích thống nhất về giá trị <code>v3</code> giữa các phó tướng còn lại. Đây là lời giải theo kiểu <em>đệ quy</em>. Do lời giải này chỉ có ý nghĩa khi <code>CC</code> là gián điệp, nên số gián điệp trong hệ thống &quot;con&quot; này là <code>m-1</code>. Quá trình đệ quy này được lặp lại <code>m</code> lần đối với mỗi phó tướng, cho đến trường hợp <code>m=0</code> (là trường hợp đơn giản đã bàn ở trên).</li>
+<li><strong>Performance của lời giải</strong>: Độ phức tạp (complexity) xét về mặt số lượng thông tin cần gửi đi của lời giải này là <code>O(n^m)</code>, do kết quả của quá trình đệ quy. Điều này có nghĩa là với lời giải trên có tính thực tế không cao trong các hệ thống lớn gồm nhiều process (do số thông tin cần gửi ở đây tăng theo cấp số nhân). Đã có nhiều nghiên cứu cải tiến lời giải nhằm cải thiện hiệu năng của bài toán này, như pBFT, Speculative Byzantine Fault Tolerance...</li>
+</ul>
+<h3 id="ung-dung-thuc-te-cua-thuat-toan-bft">Ứng dụng thực tế của thuật toán BFT</h3>
+<p>Thuật toán BFT (và các biến thể) nhằm giải quyết vấn đề consensus cho các hệ thống mà có thể sẽ gặp phải kiểu sự cố Byzantine (mời xem lại định nghĩa về kiểu sự cố này ở <a href="/posts/distributed-system-overview">phần 1</a>). Ví dụ về các hệ thống này bao gồm Blockchain, các hệ thống hàng không vũ trụ của NASA hay SpaceX...</p>
+<p>Tuy nhiên, trong hầu hết các ứng dụng Internet thực tế, kiểu sự cố Byzantine hiếm khi xảy ra (so với các kiểu sự cố khác như fail-stop, fail-recover). Lý do là vì: 1) các hệ thống DS như Database, Message Queue ... thường được triển khai ở trong một môi trường an toàn (thường là trong các data center có sự kiểm soát tốt về mặt kết nối mạng thông qua tường lửa...), tách biệt với các cá thể có ý định tấn công từ bên ngoài; 2) kết nối của hệ thống với môi trường Internet bên ngoài thường được mã hóa dựa trên những giao thức bảo mật như SSL. VD như, khi bạn đọc blog này với đường link bao gồm &quot;<em>https</em>&quot;, bạn được đảm bảo rằng nội dung của blog thực sự đến từ người viết chứ không bị đánh tráo; 3) các giao thức được chuẩn hóa như TCP/IP, HTTP... cũng giúp bảo vệ cho hệ thống khỏi những lỗi Byzantine được gây ra do trục trặc từ phần cứng.</p>
+<p>Nói thế để thấy rằng, tuy thuật toán BFT tương đối phức tạp và có hiệu năng thấp, chúng ta cũng không cần phải lo đến việc áp dụng thuật toán này cho dự án của mình. Trong các phần sau, chúng ta sẽ bàn thêm về các thuật toán Consensus cho các hệ thống được coi như &quot;miễn dịch&quot; với kiểu sự cố Byzantine.</p>
+ 
+    </div>
+          
+  </section>
+
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 1759; // DO NOT CHANGE THIS
+        var url = new URL(window.location.href);
+        url.hash = "";
+        url.search = "";
+        if(url.pathname.endsWith(".html")) {
+            url.pathname = url.pathname.substr(url.pathname.startsWith("/") ? 1:0 , url.pathname.indexOf(".html"));
+        }
+
+        var HYVOR_TALK_CONFIG = {
+            url: url.href,
+            id: url.pathname
+        };
+    </script>
+  <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</article>
+
+
+<footer class="section-padding--sm footer">
+  <span>
+  </span>
+  <ul class="footer__social">
+    <li><a class="fa fa-lg fa-rss" href="/feed.rss" target="_blank"></a></li>
+  </ul>
+</footer>
+
+
+        </main>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rellax/1.0.0/rellax.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
+<script type="text/javascript" src="/assets/js/nav.js"></script>
+ 
+  </body>
+</html>

@@ -37,14 +37,19 @@
     <![endif]-->
 </head>
  
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Oswald:wght@400;500;700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
     <body>
         <style>
-            h1,h2,h3,h4,h5,h6,blockquote {
-                font-family: 'IBM Plex Mono', monospace;
+            h1,h2,h3,h4,h5,h6 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 500;
+            }
+
+            blockquote {
+                font-family: 'Roboto Mono', monospace;
             }
         </style>
         <div class="sidenav">
@@ -67,6 +72,7 @@
 <section class="previews">
   <div>
       <figure class="absolute-bg preview__img" style="background-image: url('/assets/images/background.jpg');"></figure>
+      <figure class="absolute-bg preview__img" style="background-image: url('/assets/images/background.jpg');"></figure>
     <div id="particles-js" class="previews__container">
       <span>Category</span>
         <h1>distributed-systems</h1>
@@ -83,6 +89,18 @@
     </header>
 <div class="tab">
     <ul>
+    <li class="preview">
+      <a class="preview__link" href="/posts/consensus-problem-vi">
+        <span class="preview__date">Tuesday, September 1, 2020</span>
+        <h2 class="preview__header">[P2] B&#xE0;i to&#xE1;n &#x111;&#x1ED3;ng thu&#x1EAD;n trong Distributed Systems</h2>    
+      </a>
+      <div class="preview__link preview__excerpt" style="padding-top: 0; padding-bottom: 0;">
+        <p>Ví dụ về Distributed Systems được phát triển và sử dụng trong thực tế bao gồm hệ thống Database (SQL, NoSQL), hệ thống Cache (Redis, Memcached), hệ thống Message-Queue hay Publish/Subscribe (Kafka, RabbitMQ ...). Những hệ thống này tuy có những tính năng khác nhau, tuy nhiên phần cốt lõi của chúng đều phải giải quyết một vấn đề cơ bản, đó là bài toán <strong>đồng thuận</strong>.</p>
+      </div>
+      <a class="preview__link" href="/posts/consensus-problem-vi">
+        <span class="preview__more">Read More</span>
+      </a>
+    </li>
     <li class="preview">
       <a class="preview__link" href="/posts/distributed-system-overview">
         <span class="preview__date">Wednesday, August 26, 2020</span>
@@ -114,18 +132,27 @@
     <div class="tab">
   <ul class="cards">
       <li class="card">
-        <a class="card__link" href="/tags/distributed-systems-design">
+        <a class="card__link" href="/tags/distributed-systems">
           <div class="card__container">
-            <h2 class="card__header">distributed-systems design</h2>
+            <h2 class="card__header">distributed-systems</h2>
+            <p class="card__count">2 Posts</p>
+            <span class="card__more">View All</span>
+          </div>
+        </a>
+      </li>
+      <li class="card">
+        <a class="card__link" href="/tags/consensus">
+          <div class="card__container">
+            <h2 class="card__header">consensus</h2>
             <p class="card__count">1 Posts</p>
             <span class="card__more">View All</span>
           </div>
         </a>
       </li>
       <li class="card">
-        <a class="card__link" href="/tags/distributed-systems">
+        <a class="card__link" href="/tags/distributed-systems-design">
           <div class="card__container">
-            <h2 class="card__header">distributed-systems</h2>
+            <h2 class="card__header">distributed-systems design</h2>
             <p class="card__count">1 Posts</p>
             <span class="card__more">View All</span>
           </div>
