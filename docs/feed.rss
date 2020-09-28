@@ -5,8 +5,8 @@
 		<link>http://dhhoang.github.io/</link>
 		<description>Huy Hoang's blog. Coding, Engineering, Science, and other stuffs</description>
 		<copyright>2020</copyright>
-		<pubDate>Mon, 28 Sep 2020 15:34:11 GMT</pubDate>
-		<lastBuildDate>Mon, 28 Sep 2020 15:34:11 GMT</lastBuildDate>
+		<pubDate>Mon, 28 Sep 2020 16:04:47 GMT</pubDate>
+		<lastBuildDate>Mon, 28 Sep 2020 16:04:47 GMT</lastBuildDate>
 		<item>
 			<title>[P3] Mô hình State Machine trong Distributed Systems</title>
 			<link>http://dhhoang.github.io/posts/state-machine-ds-vi</link>
@@ -20,7 +20,7 @@
 &lt;li&gt;&lt;strong&gt;State machine&lt;/strong&gt; trong tin học là một mô hình tính toán, trong đó một máy tính (machine) thay đổi trạng thái (state) dựa theo chuỗi input mà nó được cung cấp. Ta hãy lấy ví dụ một bài toán: xác định xem trong một dãy số nhị phân (VD: &lt;code&gt;110100101&lt;/code&gt;), số chữ số &lt;code&gt;0&lt;/code&gt; là chẵn hay lẻ. Bài toán này có thể giải bằng cấu trúc State machine, trong đó chuỗi input là chuỗi các chữ số nhị phân, và &amp;quot;state&amp;quot; có thể là &amp;quot;chẵn&amp;quot; (S1) hay &amp;quot;lẻ&amp;quot; (S2). State machine này bắt đầu từ trạng thái S1 (có 0 chữ số &lt;code&gt;0&lt;/code&gt;), và với mỗi giá trị chữ số, nó thay đổi trạng thái theo như hình minh họa bên dưới. Trạng thái cuối cùng cũng là kết quả (output) của bài toán.&lt;/li&gt;
 &lt;li&gt;Về &lt;strong&gt;thứ tự của các phần tử trong một tật hợp&lt;/strong&gt;. Giả sử ta có một tập hợp &lt;code&gt;S={x1,x2,x3,x4}&lt;/code&gt;. Nếu tất cả các phần tử của tập hợp này có thể được sắp xếp theo một thứ tự cố định (VD: &lt;code&gt;x1 &amp;lt; x2 &amp;lt; x3 &amp;lt; x4&lt;/code&gt;), bao gồm cả tính bắc cầu (&lt;code&gt;x1 &amp;lt; x2, x2 &amp;lt; x3 =&amp;gt; x1 &amp;lt; x3&lt;/code&gt;) và phản đối xứng (&lt;code&gt;x1 &amp;lt;= x2 &amp;amp; x2 &amp;lt;= x1 =&amp;gt; x1 = x2&lt;/code&gt;), thì tập hợp này được gọi là có thứ tự &lt;strong&gt;toàn phần&lt;/strong&gt; (total order). Nếu không thỏa mãn điều kiện trên thì tập hợp này có thứ tự &lt;strong&gt;một phần&lt;/strong&gt; (partial order). Khái niệm này quan trọng trong việc xác định thứ tự các sự kiện trong Distributed Systems. Bạn có thể tham khảo kĩ hơn về lý thuyết thứ tự của tập hợp tại &lt;a href="http://book.mixu.net/distsys/time.html"&gt;đây&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/sm_acceptor.jpg" class="img-fluid" alt="State machine" title="Logo Title Text 1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/sm_acceptor.png" class="img-fluid" alt="State machine" title="Logo Title Text 1" /&gt;&lt;/p&gt;
 &lt;h2 id="bat-au-tu-mot-cau-truc-quen-thuoc-log"&gt;Bắt đầu từ một cấu trúc quen thuộc: &lt;em&gt;log&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;Hầu như ai làm dev cũng đều phải quen làm việc với &lt;em&gt;log&lt;/em&gt;. Nói đơn giản thì log là một chuỗi các dữ kiện giúp lưu lại thông tin về những sự kiện đã xảy ra trong quá trình phần mềm vận hành. Mỗi dữ kiện được gọi là một &lt;em&gt;entry&lt;/em&gt;. Ví dụ, đây là một đoạn log của &lt;code&gt;dpkg&lt;/code&gt; trên Ubuntu:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;$ tail -f /var/log/dpkg.log
