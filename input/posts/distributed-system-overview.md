@@ -33,7 +33,7 @@ Mỗi máy tính vật lý, do nhiều nguyên nhân khác nhau, có thể gặp
 * **Fail-recover**: Process có thể ngừng hoạt động trong một thời gian nhất định, nhưng sau đó phục hồi hoạt động trở lại. Nguyên nhân của kiểu sự cố này có thể là do máy tự động reboot do một nguyên nhân nào đó. Thường khi nhắc đến kiểu sự cố này, người ta mặc đình rằng máy có khả năng lưu trữ thông tin vào ổ đĩa cứng và phục hồi thông tin này sau khi sự cố xảy ra.
 * **Byzantine failure**: Sự cố mà máy tính không hoạt động theo đúng yêu cầu đề ra. VD như, máy có thể gửi tin tùy ý, hay thay đổi trạng thái tùy ý, không giống những gì được lập trình. Đây là kiểu sự cố *khó chịu* nhất, có thể xảy ra khi hệ thống gặp trục trặc không rõ nguyên nhân (vd như RAM có thể bị hỏng khiến xảy ra tình trạng bit-flip), hay do hệ thống bị kể xấu tấn công.
 ### Sự cố về network
-![alt text](https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/network_partition.JPG "Logo Title Text 1")
+![Network partition](https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/network_partition.JPG "Logo Title Text 1")
 Mạng máy tính cũng là một sản phẩm vật lý và vì vậy cũng có thể xảy ra sự cố. Một kiểu sự cố thường gặp là sự cố "chia cắt mạng" (**network partitioning**), được mô phỏng bởi hình trên. Sự cố này xảy ra đường truyền của một hoặc nhiều server bị chia cắt khỏi phần còn lại của hệ thống, khiến hệ thống bị chia cắt thành nhiều phần không thể giao tiếp với nhau. 
 Trên thực tế, trong các data center, một cluster máy chủ thường được kết nối với nhau bởi một hoặc nhiều cục switch. Sự cố của cổng switch hoặc dây dẫn có thể dẫn đến việc một hay nhiều server bị ngắt kết nối, dẫn đến tình trạng partitioning kể trên.
 

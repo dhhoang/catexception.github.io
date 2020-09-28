@@ -129,7 +129,7 @@ G3: [R A]
 <p>Nói cách khác, BGP chỉ có thể giải được khi số gián điệp nhỏ hơn 1/3 số vị tướng (<code>3m &lt; n</code>). Thuật toán để giải bài toán này được gọi tên là <strong>Byzantine Fault Tolerance</strong> (BFT). Chi tiết về thuật toán (và cách chứng minh) tương đối phức tạp nên mình sẽ không trình bày ở đây (khuyến khích các bạn đọc thuật toán này trong bài báo của Lamport). Tuy nhiên mình sẽ tóm tắt một vài ý chính:</p>
 <ul>
 <li><strong>Ý tưởng</strong>: Các vị tướng được chia thành 2 vai trò: 1 vị tướng đóng vai trò chỉ huy (<code>C</code>), những người còn lại là các phó tướng (<code>L</code>). Chỉ huy sẽ đề xuất phương án <code>v</code> và các phó tướng sẽ làm theo. Để đạt được yêu cầu bài toán kể cả khi chỉ huy C là gián điệp, các phó tướng sẽ thông tin cho nhau biết xem phương án <code>v</code> mà mình nhận được là gì. VD, phó tướng <code>L3</code> sẽ gửi <code>v3</code> (nhận được từ <code>C</code>) cho các phó tướng còn lại. Sau khi quá trình này kết thúc, mỗi phó tướng <code>L</code> sẽ có được một vector các giá trị mà các phó tướng nhận được từ chỉ huy: <code>L = [v1 v2 ... v_(n-1)]</code>, và sẽ chọn giá trị nào chiếm đa số.</li>
-<li>Tuy nhiên, <code>L3</code> nói trên có thể là gián điệp và có thể gửi các giá trị <code>v3</code> khác nhau cho các phó tướng còn lại. Vậy trường hợp này giải quyết ra sao? Nếu <code>L3</code> là gián điệp thì <code>v3</code> thực tế vô nghĩa. Điều quan trọng duy nhất ở đây là các phó tướng (không phải gián điệp) <em>đồng thuận</em> với nhau về <code>v3</code>. Ta có thể đạt được sự đồng thuận này bằng cách giải một bài toán đồng thuận &quot;con&quot;, tương tự như bài toán gốc nhưng loại bỏ đi chỉ huy <code>C</code>. Thay vào đó, <code>L3</code> giờ đóng vai trò chỉ huy, nhằm mục đích thống nhất về giá trị <code>v3</code> giữa các phó tướng còn lại. Đây là lời giải theo kiểu <em>đệ quy</em>. Do lời giải này chỉ có ý nghĩa khi <code>CC</code> là gián điệp, nên số gián điệp trong hệ thống &quot;con&quot; này là <code>m-1</code>. Quá trình đệ quy này được lặp lại <code>m</code> lần đối với mỗi phó tướng, cho đến trường hợp <code>m=0</code> (là trường hợp đơn giản đã bàn ở trên).</li>
+<li>Tuy nhiên, <code>L3</code> nói trên có thể là gián điệp và có thể gửi các giá trị <code>v3</code> khác nhau cho các phó tướng còn lại. Vậy trường hợp này giải quyết ra sao? Nếu <code>L3</code> là gián điệp thì <code>v3</code> thực tế vô nghĩa. Điều quan trọng duy nhất ở đây là các phó tướng (không phải gián điệp) <em>đồng thuận</em> với nhau về <code>v3</code>. Ta có thể đạt được sự đồng thuận này bằng cách giải một bài toán đồng thuận &quot;con&quot;, tương tự như bài toán gốc nhưng loại bỏ đi chỉ huy <code>C</code>. Thay vào đó, <code>L3</code> giờ đóng vai trò chỉ huy, nhằm mục đích thống nhất về giá trị <code>v3</code> giữa các phó tướng còn lại. Đây là lời giải theo kiểu <em>đệ quy</em>. Do lời giải này chỉ có ý nghĩa khi <code>C</code> là gián điệp, nên số gián điệp trong hệ thống &quot;con&quot; này là <code>m-1</code>. Quá trình đệ quy này được lặp lại <code>m</code> lần đối với mỗi phó tướng, cho đến trường hợp <code>m=0</code> (là trường hợp đơn giản đã bàn ở trên).</li>
 <li><strong>Performance của lời giải</strong>: Độ phức tạp (complexity) xét về mặt số lượng thông tin cần gửi đi của lời giải này là <code>O(n^m)</code>, do kết quả của quá trình đệ quy. Điều này có nghĩa là với lời giải trên có tính thực tế không cao trong các hệ thống lớn gồm nhiều process (do số thông tin cần gửi ở đây tăng theo cấp số nhân). Đã có nhiều nghiên cứu cải tiến lời giải nhằm cải thiện hiệu năng của bài toán này, như pBFT, Speculative Byzantine Fault Tolerance...</li>
 </ul>
 <h3 id="ung-dung-thuc-te-cua-thuat-toan-bft">Ứng dụng thực tế của thuật toán BFT</h3>
@@ -159,6 +159,14 @@ G3: [R A]
   <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </article>
 
+ <section class="next">
+    <a class="next__link" href="/posts/state-machine-ds-vi" style="background-image: url('/assets/images/background.jpg');">
+      <div class="next__container">
+        <span>Read Next</span>
+        <h2>[P3] M&#xF4; h&#xEC;nh State Machine trong Distributed Systems</h2>
+      </div> 
+    </a>
+  </section>
 
 <footer class="section-padding--sm footer">
   <span>

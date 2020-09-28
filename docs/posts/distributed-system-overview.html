@@ -135,7 +135,7 @@
 <li><strong>Byzantine failure</strong>: Sự cố mà máy tính không hoạt động theo đúng yêu cầu đề ra. VD như, máy có thể gửi tin tùy ý, hay thay đổi trạng thái tùy ý, không giống những gì được lập trình. Đây là kiểu sự cố <em>khó chịu</em> nhất, có thể xảy ra khi hệ thống gặp trục trặc không rõ nguyên nhân (vd như RAM có thể bị hỏng khiến xảy ra tình trạng bit-flip), hay do hệ thống bị kể xấu tấn công.</li>
 </ul>
 <h3 id="su-co-ve-network">Sự cố về network</h3>
-<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/network_partition.JPG" class="img-fluid" alt="alt text" title="Logo Title Text 1" />
+<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/network_partition.JPG" class="img-fluid" alt="Network partition" title="Logo Title Text 1" />
 Mạng máy tính cũng là một sản phẩm vật lý và vì vậy cũng có thể xảy ra sự cố. Một kiểu sự cố thường gặp là sự cố &quot;chia cắt mạng&quot; (<strong>network partitioning</strong>), được mô phỏng bởi hình trên. Sự cố này xảy ra đường truyền của một hoặc nhiều server bị chia cắt khỏi phần còn lại của hệ thống, khiến hệ thống bị chia cắt thành nhiều phần không thể giao tiếp với nhau.
 Trên thực tế, trong các data center, một cluster máy chủ thường được kết nối với nhau bởi một hoặc nhiều cục switch. Sự cố của cổng switch hoặc dây dẫn có thể dẫn đến việc một hay nhiều server bị ngắt kết nối, dẫn đến tình trạng partitioning kể trên.</p>
 <p>Ngoài ra, một vài sự cố mạng khác có thể kể ra như việc latency bị tăng cao (do congestion control), hay network adapter của các server gặp trục trặc ...</p>

@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Huy Hoang blog - [P3] M&#xF4; h&#xEC;nh State Machine trong Distributed Systems</title>
+  <meta name="description" content="Huy Hoang&#x27;s blog. Coding, Engineering, Science, and other stuffs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <link type="application/rss+xml" rel="alternate" title="Huy Hoang blog" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" title="Huy Hoang blog" href="/feed.atom" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Lora|Space+Mono:700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="/assets/css/main.css" rel="stylesheet" />
+  <link href="/assets/css/custom.css" rel="stylesheet" />
+
+  <meta name="application-name" content="Huy Hoang blog" />
+  <meta name="msapplication-tooltip" content="Huy Hoang blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Huy Hoang blog - [P3] M&#xF4; h&#xEC;nh State Machine trong Distributed Systems" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://dhhoang.github.io/posts/state-machine-ds-vi" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/assets/js/html5shiv.js"></script>
+      <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+ 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Oswald:wght@400;500;700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-csharp.min.js" integrity="sha512-qvSIQfI/qEeMC1E1LMSPCsDl8vFzl0rkBfF6dDcnMJxQT+8M2WjSyDGqHQzZa+RChv3jkdKnZAo99BcAbGsnQg==" crossorigin="anonymous"></script>
+    <body>
+        <style>
+            h1,h2,h3,h4,h5,h6 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 500;
+            }
+
+            blockquote {
+                font-family: 'Roboto Mono', monospace;
+            }
+
+            .preview__excerpt{
+                font-family: 'Roboto Mono', monospace;
+                font-size: 1rem;
+            }
+
+        </style>
+        <div class="sidenav">
+  <a class="closebtn"><i class="fa fa-times"></i></a>
+  <h2><a class="" href="/"><span>Huy Hoang&#x27;s blog. Coding, Engineering, Science, and other stuffs</span></a></h2>
+                <a class="" href="/about"><span>About Me</span></a>
+</div>
+<a class="nav openbtn">
+      <i class="fa fa-bars fa-2x"></i>
+    </a>
+    
+    
+        <main role="main" class="🏆">
+            <article class="language-shell">
+    <style>
+    .post p:first-child {
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    blockquote {
+        font-size: 1em;
+        background: #f9f9f9;
+        border-left: 7px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0 10px;
+        font-weight: 400;
+    }
+    </style>
+
+  <header class="section-padding--lg mast rellax" data-rellax-speed="-4">
+    <a class="nav nav--white" href="/">
+      <i class="fa fa-lg fa-arrow-left"></i>
+      <span>Back to Posts</span>
+    </a>
+    <figure class="absolute-bg mast__img" style="background-image: url('/assets/images/background.jpg');"></figure>
+    <div class="mast__container">
+      <span><time datetime="YYYY-09-DD">Friday, September 25, 2020</time></span>
+       <h1>[P3] M&#xF4; h&#xEC;nh State Machine trong Distributed Systems</h1>   
+              <span>
+                    <a class="nav--white" href="/tags/distributed-systems">distributed-systems</a>
+,                    <a class="nav--white" href="/tags/event-sourcing">event-sourcing</a>
+,                    <a class="nav--white" href="/tags/log-replication">log-replication</a>
+        </span>
+    </div>
+  </header>
+  <section class="section-padding bg-grey">
+    <div class="post">
+      <p>Khi tìm hiểu và làm việc với Distributed Systems, chúng ta có thể sẽ hay bắt gặp những cụm từ như: <em>Replicated State machine</em>, <em>Log replication</em> hay <em>Event-driven</em>, <em>Event-sourcing</em>. Về bản chất, những khái niệm này đều được xây dựng xung quanh mô hình &quot;Máy trạng thái&quot; (State machine). Bài viết này sẽ mô tả mô hình này và lý do tại sao State machine lại được áp dụng rộng rãi trong Distributed Systems.</p>
+<h2 id="nhac-lai-so-qua-mot-vai-khai-niem">Nhắc lại sơ qua một vài khái niệm</h2>
+<ul>
+<li><strong>Trạng thái (state) của một process</strong> có thể hiểu là tập hợp các giá trị của các biến (variable) trong process đó. VD, nếu process <code>p1</code> có thể có state <code>S1 = {x=1, y=2}</code>. Thường trong thực tế, một process sẽ có cả dữ liệu trong RAM lẫn trên đĩa cứng, chúng ta coi tất cả các dữ liệu này là state của process đó.</li>
+<li><strong>State machine</strong> trong tin học là một mô hình tính toán, trong đó một máy tính (machine) thay đổi trạng thái (state) dựa theo chuỗi input mà nó được cung cấp. Ta hãy lấy ví dụ một bài toán: xác định xem trong một dãy số nhị phân (VD: <code>110100101</code>), số chữ số <code>0</code> là chẵn hay lẻ. Bài toán này có thể giải bằng cấu trúc State machine, trong đó chuỗi input là chuỗi các chữ số nhị phân, và &quot;state&quot; có thể là &quot;chẵn&quot; (S1) hay &quot;lẻ&quot; (S2). State machine này bắt đầu từ trạng thái S1 (có 0 chữ số <code>0</code>), và với mỗi giá trị chữ số, nó thay đổi trạng thái theo như hình minh họa bên dưới. Trạng thái cuối cùng cũng là kết quả (output) của bài toán.</li>
+<li>Về <strong>thứ tự của các phần tử trong một tật hợp</strong>. Giả sử ta có một tập hợp <code>S={x1,x2,x3,x4}</code>. Nếu tất cả các phần tử của tập hợp này có thể được sắp xếp theo một thứ tự cố định (VD: <code>x1 &lt; x2 &lt; x3 &lt; x4</code>), bao gồm cả tính bắc cầu (<code>x1 &lt; x2, x2 &lt; x3 =&gt; x1 &lt; x3</code>) và phản đối xứng (<code>x1 &lt;= x2 &amp; x2 &lt;= x1 =&gt; x1 = x2</code>), thì tập hợp này được gọi là có thứ tự <strong>toàn phần</strong> (total order). Nếu không thỏa mãn điều kiện trên thì tập hợp này có thứ tự <strong>một phần</strong> (partial order). Khái niệm này quan trọng trong việc xác định thứ tự các sự kiện trong Distributed Systems. Bạn có thể tham khảo kĩ hơn về lý thuyết thứ tự của tập hợp tại <a href="http://book.mixu.net/distsys/time.html">đây</a>.</li>
+</ul>
+<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/sm_acceptor.jpg" class="img-fluid" alt="State machine" title="Logo Title Text 1" /></p>
+<h2 id="bat-au-tu-mot-cau-truc-quen-thuoc-log">Bắt đầu từ một cấu trúc quen thuộc: <em>log</em></h2>
+<p>Hầu như ai làm dev cũng đều phải quen làm việc với <em>log</em>. Nói đơn giản thì log là một chuỗi các dữ kiện giúp lưu lại thông tin về những sự kiện đã xảy ra trong quá trình phần mềm vận hành. Mỗi dữ kiện được gọi là một <em>entry</em>. Ví dụ, đây là một đoạn log của <code>dpkg</code> trên Ubuntu:</p>
+<pre><code class="language-bash">$ tail -f /var/log/dpkg.log
+
+2020-09-21 01:51:20 status installed man-db:amd64 2.9.1-1
+2020-09-21 01:51:21 trigproc dbus:amd64 1.12.16-2ubuntu2.1 &lt;none&gt;
+2020-09-21 01:51:22 status half-configured dbus:amd64 1.12.16-2ubuntu2.1
+2020-09-21 01:51:23 status installed dbus:amd64 1.12.16-2ubuntu2.1
+2020-09-21 01:51:24 trigproc mime-support:all 3.64ubuntu1 &lt;none&gt;
+2020-09-21 01:51:25 status half-configured mime-support:all 3.64ubuntu1
+2020-09-21 01:51:26 status installed mime-support:all 3.64ubuntu1
+2020-09-21 01:51:27 trigproc initramfs-tools:all 0.136ubuntu6.3 &lt;none&gt;
+2020-09-21 01:51:28 status half-configured initramfs-tools:all 0.136ubuntu6.3
+2020-09-21 01:51:29 status installed initramfs-tools:all 0.136ubuntu6.3
+</code></pre>
+<p>Một log entry trong ví dụ trên bao gồm hai thông tin: một là mô tả về sự kiện, hai là thời điểm (timestamp) xảy ra của sự kiện. Loại log quen thuộc này thường được gọi là <code>Application log</code>, mục đích chính của nó là giúp chúng ta truy tìm thông tin khi cần thiết (ví dụ như để truy vết bug chẳng hạn). Lưu ý là, các entry trong log luôn có thứ tự <em>toàn phần</em> (total order). Đối với log kể trên thì giá trị của timestamp là yếu tố xác định thứ tự của các entry. Log entry chỉ có thể được thêm vào log, chứ không thể bị xóa đi hay thay đổi. Thuật ngữ mô tả quy tắc này là &quot;append-only&quot;.</p>
+<p>Trong lý thuyết về Distributed Systems, hai thành phần thông tin kể trên của log (nội dung và thứ tự của sự kiện) đóng vai trò quan trọng. Các hệ thống Distributed Systems hiện nay đều được xây dựng xung quanh việc đồng thuận về nội dung của chuỗi log. Hệ quả này dựa trên nguyên lý (tạm gọi là nguyên lý <em>nhân bản trạng thái</em>) như sau:</p>
+<blockquote class="blockquote">
+<p>Nếu ta có hai process tất định (deterministic) như nhau và chúng xử lý cùng chuỗi dữ liệu đầu vào (input) như nhau, thì chúng sẽ có đầu ra (output) và trạng thái cuối cùng (state) như nhau.</p>
+</blockquote>
+<p><em>Deterministic process</em>  ở đây được hiểu là process chỉ vận hành dựa trên việc xử lý input chứ không phụ thuộc vào các yếu tố bên ngoài (VD như yếu tố thời gian, yếu tố ngẫu nhiên...). Hiển nhiên là hai hệ thống deterministic như nhau nếu cùng nhận một chuỗi input sẽ cho ra kết quả như nhau. Do đó, chúng ta có thể lưu trữ hoàn toàn lịch sử trạng thái của một hệ thống bằng việc lưu trữ chuỗi input dưới dạng log.</p>
+<p>Đến đây thì chúng ta có thể nhận thấy được sự liên quan giữa &quot;log&quot; và &quot;State machine&quot;. Nếu ta có một <em>deterministic process</em> được cấu trúc theo dạng State machine và một log lưu lại các input của process này, ta có được toàn bộ thông tin về quá trình hoạt động của process. Lấy ví dụ, một hệ thống ngân hàng cần lưu trữ thông tin tài khoản của khách hàng. Ta có thể lưu những yêu cầu xử lý của khách hàng dưới dạng input log như sau:</p>
+<pre><code>1. Tài khoản X được khởi tạo.
+2. Tài khoản X nạp 100.000 VND.
+3. Tài khoản Y được khởi tạo.
+4. Tài khoản X chuyển cho tài khoản Y 50.000 VND.
+5. Tài khoản Y rút ra 20.000 VND.
+</code></pre>
+<p>Từ log trên ta có thể dễ dàng tính ra trạng thái cuối cùng của hệ thống này (sau sự kiện <code>5</code>) là <code>{X=50.000, Y=30.000}</code>. Tuy nhiên, ngoài ra, cấu trúc input log  này có một vài ưu điểm như sau:</p>
+<ul>
+<li>Thứ nhất, cấu trúc này lưu trữ được nhiều thông tin hơn là việc lưu trạng thái thông thường. Ở đây ta mặc nhiên có được một lịch sử giao dịch cho tài khoản X và Y. Điều này cho phép ta có thể xác định được trạng thái của hệ thống trong bất kì thời điểm nào.</li>
+<li>Thứ hai, cấu trúc này hỗ trợ khả năng đối phó sự cố (fault tolerant) của hệ thống. Nếu như một server bị crash trong quá trình hoạt động, thì khi phục hồi, ta có thể tái thiết lại trạng thái cho server đó bằng cách &quot;chạy&quot; lại input log này (đây còn được gọi là 'log replay').</li>
+<li>Kết cấu này cũng mang tính đàn hồi (scalable) cao. Dữ liệu log kể trên có thể được nhân bản hay chuyển hóa thành các dạng dữ liệu khác nhằm phục vụ cho các mục đích khác nhau. Ta sẽ bàn về điều này nhiều hơn trong phần <strong>Event sourcing</strong>.</li>
+</ul>
+<h2 id="log-replication-va-replicated-state-machine">Log replication và Replicated State machine.</h2>
+<p>Ở <a href="/posts/consensus-problem-vi">phần 2</a>, chúng ta đã nói sơ qua về tầm quan trọng của bài toán đồng thuận (consensus) trong DS. Bài toán này thực ra là phiên bản đơn giản hóa, vì yêu cầu đặt ra chỉ là giúp các server đồng thuận 1 giá trị. Trên thực tế, các hệ thống khi vận hành phải tiếp nhận yêu cầu của người dùng và thay đổi trạng thái liên tục, do đó bài toán ở đây là các server phải đồng thuận một chuỗi giá trị thay đổi theo thời gian. Các server cũng có thể bị mất kết nối hoặc crash, khiến cho việc đồng bộ thông tin giữa các máy càng trở nên phức tạp. Lấy ví dụ, nếu một server crash và sau đó phục hồi, khi đó trạng thái của server này đã khác biệt so với các server khác. Làm thế nào để ta biết được trạng thái nào mới là trạng thái đúng?</p>
+<p>Mô hình <em>Replicated State machine</em> (các máy trạng thái nhân bản), hay <em>Log replication</em>, được phát triển nhằm giải quyết vấn đề này. Trong mô hình này, mỗi server trong hệ thống được cấu trúc dưới dạng State machine, tương đồng với <em>Deterministic process</em> được nêu ở phần trên. Log trong trường hợp này là chuỗi các input mà hệ thống nhận được từ người dùng (client), sắp xếp theo thứ tự thời gian (total order). State machine và log này được nhân bản ra tất cả các server trong hệ thống nhằm giúp các máy đồng thuận với nhau. Có nhiều cơ chế để thực hiện thao tác nhân bản này, ví dụ như <em>leader/follower</em> (thuật toán Raft), hay <em>atomic broadcast</em> (thuật toán ZAB). Chúng ta sẽ tìm hiểu sâu hơn về các thuật toán này trong các bài sau.</p>
+<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/replicated_state_machine.jpg" class="img-fluid" alt="Replicated State Machine" title="Logo Title Text 1" /></p>
+<p>Điểm ưu việt của cơ chế này là, trong trường hợp một server nào đó fail, server này có thể phục hồi trạng thái bằng cách replay lại log. Các server cũng có thể so sánh phiên bản log của mình và xác định được phiên bản nào là phiên bản được cập nhật mới nhất (dựa trên thứ tự các entry trong log). Ngoài ra, nếu một server mới được thêm vào hệ thống, server này cũng có thể đồng thuận với các server còn lại thông qua cơ chế tương tự.</p>
+<h2 id="moi-lien-he-en-event-sourcing">Mối liên hệ đến Event-sourcing</h2>
+<p><em>Replicated State machine</em> (RSM) và <em>Event-sourcing</em> (ES) là hai khái niệm khác nhau. RSM chỉ về mô hình consensus trong Distributed Systems nói chung, trong khi đó ES nói về cách tổ chức và sắp đặt dữ liệu của một ứng dụng cụ thể. Tuy nhiên, hai khái niệm này dựa trên cùng một nguyên lý <em>nhân bản trạng thái</em> nêu trên, nên ta hãy bàn sơ qua về ES ở đây một chút.</p>
+<p><em>Event-sourcing</em> hoạt động dựa trên việc lưu lại dữ liệu của một hệ thống dưới dạng một chuỗi các sự kiện (event) theo thứ tự thời gian trong một cấu trúc Event Log. Event log này là dữ liệu duy nhất mô tả trạng thái của hệ thống, tại thời điểm hiện tại cũng như trong quá khứ. Kiến trúc ES hoạt động khác biệt so với kiểu trên trúc phổ thông thêm-sửa-xóa (CRUD). Thử ví dụ về hệ thống ngân hàng ở phần trước: một hệ thống theo kiểu CRUD có thể lưu mỗi tài khoản ở một dòng trong bảng SQL, trong khi đó, với ES, ta lưu tất cả các sự kiện trong hệ thống trong một chuỗi event duy nhất (xem VD ở trên). Cũng giống như input log, Event log cho phép tái tạo lại dữ liệu của hệ thống ở bất kì thời điểm nào.</p>
+<p>Điểm cộng lớn nhất của cách bố trí dữ liệu kiểu này nằm ở sự đơn giản: một chuỗi sự kiện duy nhất chứa đầy đủ các thông tin của hệ thống, từ số tiền hiện tại đến lịch sử giao dịch của một tài khoản. Theo kiểu CRUD, ta sẽ phải có một bảng riêng biệt để lưu lịch sử các giao dịch của các tài khoản, và sử dụng JOIN khi cần truy cập dữ liệu ở nhiều bảng khác nhau. Với ES, ta chỉ có một chuỗi duy nhất (thường được gọi là <em>single source of truth</em>).</p>
+<p>Sự đơn giản này giúp các hệ thống ES có tính đàn hồi (scalability) cao. Với kiểu CRUD, thường thì ta sẽ phải thiết kế Database nhằm tối ưu cho cả việc đọc và ghi dữ liệu. Tuy nhiên không phải dữ liệu nào cũng có thể tối ưu được một cách tuyệt đối. Hầu hết các hệ thống đều phải hy sinh hiệu năng cho việc đọc (hoặc ghi) để tối ưu cho hoạt động còn lại. Hơn nữa, các ứng dụng trên thực tế đều phải thay đổi theo thời gian để liên tục đáp ứng yêu cầu mới, do đó, việc tối ưu database ngay từ đầu gần như là bất khả thi.</p>
+<p><img src="https://github.com/dhhoang/dhhoang.github.io/raw/gh-pages/event_sourcing_projection.png" class="img-fluid" alt="Event sourcing projection" title="Logo Title Text 1" /></p>
+<p>Với ES thì dữ liệu được tổ chức theo kiểu hoàn toàn khác biệt. Tất cả tiến trình ghi (write) đều có hiệu năng cao, do chỉ phải thêm (append) event (do event không được phép sửa/xóa). Các event này sau đó được chuyển hóa thành các dạng dữ liệu được tối ưu cho việc đọc (có thể là trong một bảng SQL hoặc các database khác). Quy trình này được gọi là <em>projection</em> (Xem hình minh họa ở trên), trong đó Event log tại từng thời điểm nhất định được chuyển hóa thành các snapshot nhằm tối ưu việc truy cập dữ liệu. Điều này giúp cho hệ thống không bị bó buộc bởi cấu trúc quan hệ - thực thể (entity-relationship) trong các kiểu dữ liệu truyền thống.</p>
+ 
+    </div>
+          
+  </section>
+
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 1759; // DO NOT CHANGE THIS
+        var url = new URL(window.location.href);
+        url.hash = "";
+        url.search = "";
+        if(url.pathname.endsWith(".html")) {
+            url.pathname = url.pathname.substr(url.pathname.startsWith("/") ? 1:0 , url.pathname.indexOf(".html"));
+        }
+
+        var HYVOR_TALK_CONFIG = {
+            url: url.href,
+            id: url.pathname
+        };
+    </script>
+  <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</article>
+
+
+<footer class="section-padding--sm footer">
+  <span>
+  </span>
+  <ul class="footer__social">
+    <li><a class="fa fa-lg fa-rss" href="/feed.rss" target="_blank"></a></li>
+  </ul>
+</footer>
+
+
+        </main>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rellax/1.0.0/rellax.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
+<script type="text/javascript" src="/assets/js/nav.js"></script>
+ 
+  </body>
+</html>
